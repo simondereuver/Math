@@ -9,15 +9,15 @@ function newtonRaphson(f, fp, x0, iterations)
     #xn is the next value in the iteration
     xn = 0
     println("Iteration\tX-value\t")
-    println("================================================")
+    println("=========================")
 
     for i in 1:iterations
-        println("$i\t$x0")
+        println(string(lpad(i, 9), "\t", @sprintf("%.7f", x0), "\t"))
         xn = x0 - f(x0)/fp(x0)
         x0 = xn
     end        
 
-    println("Root approximation: $xn after $iterations")
+    println("Root approximation: $xn after $iterations iterations.")
 end
 
 #Fix point method for finding a desired steplength towards the search of a root.
