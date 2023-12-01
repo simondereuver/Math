@@ -21,7 +21,9 @@ function newtonRaphson(f, fp, x0, iterations)
 end
 
 #Fix point method for finding a desired steplength towards the search of a root.
-#Tested with function: f(x) = (x^5 -10x -1)/70 at values fixPoint( 6, 2, f, 0.01)
+#Tested with functions and values:
+#f(x) = x - ((x^5 -10x -1)/70) at values fixPoint( 6, 2, f, 1e-2)
+#f(x) = sqrt(pi + x) at values fixPoint(50, pi, f, 1e-11)
 #Change functions and input as needed.
 function fixPoint(iterations, x0, f, stepSize)
     i = 0
@@ -32,9 +34,9 @@ function fixPoint(iterations, x0, f, stepSize)
     println("=========================================")
     #println("x starting value: $x0")
     while i <= iterations && currentStepSize > stepSize
-        println(string(lpad(i, 9), "\t", @sprintf("%.7f", x0), "\t", @sprintf("%.7f", currentStepSize)))
+        println(string(lpad(i, 9), "\t", @sprintf("%.15f", x0), "\t", @sprintf("%.15f", currentStepSize)))
 
-        xn = x0 - f(x0)
+        xn = f(x0)
         currentStepSize = abs(x0 - xn)
         x0 = xn
         i += 1
