@@ -14,7 +14,6 @@ function newtonRaphson(f, fp, x0, iterations)
         xn = x - f(x)/fp(x)
         x = xn
     end        
-
     println("Root approximation: $xn after $iterations iterations.")
 end
 
@@ -43,4 +42,33 @@ function fixPoint(f, x0, maxIterations, stepLength)
     else
         println("The desired step size was not achieved in $i iterations.");
     end
+end
+
+#Bisection Method for finding an approximation of a root
+#Tested with functions and values:
+#f(x) = 4x^2 + 3x - 3 at values bisectionMethod(f, 0, 1, 0.05)
+#Change functions and input as needed
+function bisectionMethod(f, a, b, errorTolerance)
+    i = 0
+    c = 0
+    println("Iteration\ta\t\tf(a)\t\tb\t\tf(b)\t\tc\t\tf(c)\t\tError")
+    println()
+    currentError = Inf
+    if (f(a) * f(b) < 0) #We have a root in given interval
+        currentError = b - a
+        while currentError > errorTolerance
+            c = a + (b - a) / 2 #Find midpoint
+            currentError = b - a
+            println(string(lpad(i, 9), "\t", @sprintf("%.7f", a), "\t", @sprintf("%.7f", f(a)), "\t", @sprintf("%.7f", b), "\t", @sprintf("%.7f", f(b)), "\t", @sprintf("%.7f", c), "\t", @sprintf("%.7f", f(c)), "\t", @sprintf("%.7f", currentError)))
+            if ((f(a) * f(c)) < 0) #Root is on left side of midpoint
+                b = c
+            else
+                a = c
+            end
+            i += 1
+        end
+    else
+        println("No root in interval $a - $b.")
+    end
+    println("Root approximation: $c after $i iterations with an error of $currentError.");
 end
