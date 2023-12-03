@@ -1,9 +1,9 @@
 using Printf
 
 #Newton Raphson method for finding an approximation of a root
-#Tested with function f(x) = x^2 -3 and its derivative fp(x) = 2x
-#at newtonRaphson(f, fp, 3, 4)
-#Change functions and input as needed
+#Tested with values:
+#f(x) = x^2 -3 and its derivative fp(x) = 2x at newtonRaphson(f, fp, 3, 4)
+#Change input as needed
 function newtonRaphson(f, fp, x0, iterations)
     x = x0 #x0 is the initial value of x or initial guess
     xn = 0 #xn is the next value in the iteration
@@ -18,10 +18,10 @@ function newtonRaphson(f, fp, x0, iterations)
 end
 
 #Fix point method for finding a desired steplength towards the search of a root
-#Tested with functions and values:
+#Tested with values:
 #f(x) = x - ((x^5 -10x -1)/70) at values fixPoint(f, 2, 6, 1e-2)
 #f(x) = sqrt(pi + x) at values fixPoint(f, pi, 50, 1e-11)
-#Change functions and input as needed
+#Change input as needed
 function fixPoint(f, x0, maxIterations, stepLength)
     i = 0
     x = x0 #x0 is the initial value of x or initial guess
@@ -45,9 +45,9 @@ function fixPoint(f, x0, maxIterations, stepLength)
 end
 
 #Bisection Method for finding an approximation of a root
-#Tested with functions and values:
+#Tested with values:
 #f(x) = 4x^2 + 3x - 3 at values bisectionMethod(f, 0, 1, 0.05)
-#Change functions and input as needed
+#Change input as needed
 function bisectionMethod(f, a, b, errorTolerance)
     i = 0
     c = 0
