@@ -4,7 +4,7 @@ using Printf
 #Tested with values:
 #f(x) = x^2 -3 and its derivative fp(x) = 2x at newtonRaphson(f, fp, 3, 4)
 #Change input as needed
-function newtonRaphson(f, fp, x0, iterations)
+function newtonRaphson(f, fp, x0, maxIterations)
     x = x0 #x0 is the initial value of x or initial guess
     xn = 0 #xn is the next value in the iteration
     println("Iteration\tX-value\t")
@@ -14,7 +14,7 @@ function newtonRaphson(f, fp, x0, iterations)
         xn = x - f(x)/fp(x)
         x = xn
     end        
-    println("Root approximation: $xn after $iterations iterations.")
+    println("Root approximation: $xn after $maxIterations iterations.")
 end
 
 #Fix point method for finding a desired steplength towards the search of a root
@@ -71,4 +71,28 @@ function bisectionMethod(f, a, b, errorTolerance)
         println("No root in interval $a - $b.")
     end
     println("Root approximation: $c after $i iterations with an error of $currentError.");
+end
+
+
+#Secant Method for finding an approximation of a root
+#Tested with values:
+#f(x) = x^2 - 3 at values bisectionMethod(f, 3, 1, 1e-3)
+#Change input as needed
+function secantMethod(f, x0, xPrev, errorTolerance)
+    #xPrev is xn-1
+    x = x0 #current x-value
+    xn = 0 #xn+1
+    currentError = Inf
+    i = 1
+    println("Iteration: -1, x: $xPrev")
+    println("Iteration:  0, x: $x")
+    while currentError > errorTolerance
+        xn = x - ((f(x) * (x - xPrev)) / (f(x) - f(xPrev)))
+        xPrev = x
+        x = xn
+        println("Iteration:  $i, xn: $xn")
+        currentError = abs(x - xPrev)
+        i += 1
+    end
+    println("Final root approximation: $xn")
 end
